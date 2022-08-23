@@ -20,6 +20,12 @@ class CategoriesRepository{
     CategoriesRepository.categories.push(category)
   }
 
+  static findByName(name: string){
+    const category = CategoriesRepository.categories.find(value=> value.name === name)
+
+    return category
+  }
+
   static all(){
     return CategoriesRepository.categories
   }
