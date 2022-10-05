@@ -1,6 +1,6 @@
 import {v4 as uuidv4} from 'uuid'
-import { Specification } from "../models/Specification";
-import { ICreateSpecificationDTO, ISpacificationsRepository } from "./ISpecificationsRepository";
+import { Specification } from "../../models/Specification";
+import { ICreateSpecificationDTO, ISpacificationsRepository } from "../ISpecificationsRepository";
 
 export class SpecificationsRepository implements ISpacificationsRepository{
   private specifications: Specification[]
