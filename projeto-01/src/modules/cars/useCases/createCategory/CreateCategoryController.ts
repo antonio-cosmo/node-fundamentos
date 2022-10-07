@@ -7,9 +7,14 @@ export class CreateCategoryController{
   
   handle(request: Request, response:Response){
     const {name, description} = request.body
-  
-    this.createCategoryUseCase.execute({name, description})
-
-    return response.status(201).send()
+    try{
+      this.createCategoryUseCase.execute({name, description})
+      return response.status(201).send()
+    }catch(e){
+      if(e instanceof Error) return response.send(e.message)
+      
+      return response.send(e)
+    }
+    
   }
 }

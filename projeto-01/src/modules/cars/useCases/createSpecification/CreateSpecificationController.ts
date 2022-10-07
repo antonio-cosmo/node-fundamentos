@@ -7,9 +7,15 @@ export class CreateSpecificationController{
   
   handle(request: Request, response:Response){
     const {name, description} = request.body
-  
-    this.createSpecificationUseCase.execute({name, description})
+    try{
+      this.createSpecificationUseCase.execute({name, description})
+      return response.status(201).send()
+    }catch(e){
+      if(e instanceof Error) return response.send(e.message)
+      
+      return response.send(e)
+      
+    }
 
-    return response.status(201).send()
   }
 }
