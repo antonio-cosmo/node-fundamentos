@@ -1,25 +1,25 @@
 import express from 'express'
-import multer from 'multer'
+import { AppDataSource } from './database'
+import swaggerUI from 'swagger-ui-express'
+import swaggerDoc from './swagger.json'
 import { categoryRoutes } from './routes/category.routes'
 import { specificationRoutes } from './routes/specification.routes'
 
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      cb(null, './tmp/uploads')
-    },
-    filename: function (req, file, cb) {
-      const extension = file.originalname.split('.')[1]
-      const newFileName = new Date().getTime().toString()
-      cb(null, `${newFileName}.${extension}`)
-    }
-  })
-  
-const uploads = multer({storage})
+
 const app = express()
 
 app.use(express.json())
 
-app.use('/category',uploads.single('file'),categoryRoutes)
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
+
+AppDataSource.initialize().then(() => {
+    console.log("Data Source has been initialized!")
+})
+.catch((err) => {
+    console.error("Error during Data Source initialization", err)
+})
+
+app.use('/category',categoryRoutes)
 app.use('/specification', specificationRoutes)
 
 app.listen('3333',()=>{
