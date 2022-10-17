@@ -7,12 +7,12 @@ interface IRequest{
 
 export class CreateCategoryUseCase{
   constructor(private categoriesRepository: ICategoriesRepository){}
-  execute({name, description}:IRequest){
-    const categoryExist = this.categoriesRepository.findByName(name)
+  async execute({name, description}:IRequest){
+    const categoryExist = await this.categoriesRepository.findByName(name)
     if(categoryExist){
       throw new Error('Categoria ja existe')
     } 
-    this.categoriesRepository.create({name, description})
+    await this.categoriesRepository.create({name, description})
 
   }
 }

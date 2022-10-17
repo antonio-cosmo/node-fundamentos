@@ -4,8 +4,8 @@ export class ListCategoriesUseCase{
 
   constructor(private categoryRepository: ICategoriesRepository){}
   
-  execute(){
-    const listCategories = this.categoryRepository.all()
+  async execute(){
+    const listCategories = await this.categoryRepository.all()
 
     return listCategories
   }
