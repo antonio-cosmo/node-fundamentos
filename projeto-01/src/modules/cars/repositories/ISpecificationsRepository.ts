@@ -5,7 +5,7 @@ export interface ICreateSpecificationDTO{
   description: string
 }
 
-export interface ISpacificationsRepository {
+export interface ISpecificationsRepository {
 
   create: ({name, description}:ICreateSpecificationDTO) => void
   

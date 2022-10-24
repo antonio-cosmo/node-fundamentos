@@ -1,16 +1,11 @@
 import express from 'express'
+import 'reflect-metadata'
 import { dataSource } from './database/data-source'
+import './shared/container/index'
 import swaggerUI from 'swagger-ui-express'
 import swaggerDoc from './swagger.json'
 import { categoryRoutes } from './routes/category.routes'
 import { specificationRoutes } from './routes/specification.routes'
-
-
-    // const app = express()
-
-// app.use(express.json())
-
-// app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
 
 dataSource.initialize().then(() => {
     console.log("Data Source has been initialized!")
