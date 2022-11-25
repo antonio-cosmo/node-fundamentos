@@ -3,11 +3,11 @@ import {DataSource, DataSourceOptions} from 'typeorm'
 
 const configStorge:DataSourceOptions = {
     type: "postgres",
-    host: "database_rentx",
+    host: "db_rentalX",
     port: 5432,
     username: "docker",
     password: "docker",
-    database: "database_rentx",
+    database: "db_rentalx",
     entities: ["./src/modules/cars/models/*ts"],
     migrations:["./src/database/migrations/*.ts"],
 }
