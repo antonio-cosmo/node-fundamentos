@@ -75,6 +75,32 @@
                         }
                     }
                 }
+            },
+            "delete": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Rota de criação de categorias",
+                "description": "Cria uma nova categoria",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Deleted"
+                    }
+                }
             }
         },
         "/category/import":{

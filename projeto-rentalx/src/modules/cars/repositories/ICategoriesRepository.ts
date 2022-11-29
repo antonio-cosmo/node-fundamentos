@@ -12,4 +12,6 @@ export interface ICategoriesRepository {
   findByName: (name: string)=> Promise<Category>
 
   all: () => Promise<Category[]>
+
+  delete: (name: string) => Promise<void>
 }

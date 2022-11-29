@@ -30,6 +30,7 @@ class ImportCategoryUseCase {
                 reject(erro)
             }).on('end', () =>{
                 console.log('chegando no end')
+                fs.promises.unlink(file.path)
                 resolve(categories)
             });
 
