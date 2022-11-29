@@ -1,0 +1,181 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "RentalX API Doc",
+        "description": "Documentando a API node",
+        "version": "1.0.0",
+        "contact": {
+            "email": "antonio@email.com"
+        }
+    },
+    "paths": {
+        "/category": {
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Rota de criação de categorias",
+                "description": "Cria uma nova categoria",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "Category name sample",
+                                    "description": "Category description sample"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Cateegory already exists"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "Rota de listagem de categorias",
+                "description": "lista todas as categorias",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/category/import":{
+            "post": {
+                "tags": [
+                    "Category"
+                ],
+                "summary": "importa arquivos de categoria",
+                "description": "Cria uma nova categoria",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format":"binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Cateegory already exists"
+                    }
+                }
+            }
+        },
+        "/specification": {
+            "post": {
+                "tags": [
+                    "Specification"
+                ],
+                "summary": "Rota de criação de especificações",
+                "description": "Cria uma nova especificação",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "Specification name sample",
+                                    "description": "Specification description sample"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "500": {
+                        "description": "Specification already exists"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Specification"
+                ],
+                "summary": "Rota de listagem de especificações",
+                "description": "lista todas as especificações",
+                "responses": {
+                    "200": {
+                        "description": "Success"
+                    },
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
