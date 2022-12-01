@@ -8,7 +8,7 @@ const configStorge:DataSourceOptions = {
     username: "docker",
     password: "docker",
     database: "db_rentalx",
-    entities: ["./src/modules/cars/models/*ts"],
+    entities: ["./src/modules/**/entities/*ts"],
     migrations:["./src/database/migrations/*.ts"],
 }
 export const dataSource = new DataSource(configStorge)
