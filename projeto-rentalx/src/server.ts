@@ -7,6 +7,7 @@ import swaggerUI from 'swagger-ui-express'
 import swaggerDoc from './swagger.json'
 import { categoryRoutes } from './routes/category.routes'
 import { specificationRoutes } from './routes/specification.routes'
+import { userRoutes } from './routes/user.routes'
 
 dataSource.initialize().then(() => {
     console.log("Data Source has been initialized!")
@@ -18,6 +19,7 @@ dataSource.initialize().then(() => {
     app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
     app.use('/category',categoryRoutes)
     app.use('/specification', specificationRoutes)
+    app.use('/users', userRoutes)
 
     app.listen('3333',()=>{
         console.log('Endereço: http://localhost:3333')
