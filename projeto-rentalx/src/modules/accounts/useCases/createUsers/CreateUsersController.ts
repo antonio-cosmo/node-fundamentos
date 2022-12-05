@@ -15,7 +15,5 @@ export class CreateUsersController{
 
         return res.status(201).json({message: 'Usuario criado'})
 
-
-
     }
 }

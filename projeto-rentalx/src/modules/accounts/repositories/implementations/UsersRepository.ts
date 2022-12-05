@@ -37,4 +37,10 @@ export class UsersRepository implements IUsersRepository{
     async findAll(){
         return await this.userRepository.find();
     }
+
+    async findById(id: string){
+        const user = await this.userRepository.findOneBy({id});
+
+        return user;
+    }
 }

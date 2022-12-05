@@ -1,13 +1,13 @@
-import express from 'express'
-import cors from 'cors'
+import express, { NextFunction, Request,  Response } from 'express'
 import 'reflect-metadata'
+import 'express-async-errors'
+import cors from 'cors'
 import { dataSource } from './database/data-source'
 import './shared/container/index'
-import swaggerUI from 'swagger-ui-express'
-import swaggerDoc from './swagger.json'
-import { categoryRoutes } from './routes/category.routes'
-import { specificationRoutes } from './routes/specification.routes'
-import { userRoutes } from './routes/user.routes'
+import { routes } from './routes'
+import { AppError } from './shared/AppError'
+
+
 
 dataSource.initialize().then(() => {
     console.log("Data Source has been initialized!")
@@ -15,12 +15,18 @@ dataSource.initialize().then(() => {
 
     app.use(cors({origin: true}))
     app.use(express.json())
+    app.use(routes)
 
-    app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
-    app.use('/category',categoryRoutes)
-    app.use('/specification', specificationRoutes)
-    app.use('/users', userRoutes)
-
+    routes.use(async (err: Error, req:Request, res:Response, next:NextFunction) => {
+        if(err instanceof AppError){
+        return res.status(err.status).json({message: err.message})
+        }
+    
+        return res.status(500).json({
+        status: 'error',
+        message: `Internal server error - ${err.message}`
+        })
+    })
     app.listen('3333',()=>{
         console.log('Endereço: http://localhost:3333')
 })
