@@ -2,7 +2,6 @@ import fs from "fs";
 import { parse }from "csv-parse";
 import { inject, injectable } from "tsyringe";
 import { ICategoriesRepository } from "../../repositories/ICategoriesRepository";
-import { EventListenerTypes } from "typeorm/metadata/types/EventListenerTypes";
 
 
 interface IImportCategory {
@@ -29,8 +28,7 @@ class ImportCategoryUseCase {
             }).on('error', (erro) =>{
                 reject(erro)
             }).on('end', () =>{
-                console.log('chegando no end')
-                fs.promises.unlink(file.path)
+                // fs.promises.unlink(file.path)
                 resolve(categories)
             });
 

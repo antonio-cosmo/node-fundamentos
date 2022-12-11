@@ -22,6 +22,9 @@ export class User{
     @Column({type:'boolean'})
     isAdmin: boolean;
 
+    @Column({type: 'varchar', default: null})
+    avarta_url?: string;
+
     @CreateDateColumn({type: 'timestamp', default: 'now()'})
     createdAt: Date ;
     
