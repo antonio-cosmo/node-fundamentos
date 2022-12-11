@@ -9,7 +9,7 @@ const userRoutes = Router();
 const uploadAvatar = multer(configUpload.upload('avatar'));
 const createUsersController = new CreateUsersController();
 const listUserController = new ListUsersController();
-const updateUserAvatarController = new UpdateUserAvatarController;
+const updateUserAvatarController = new UpdateUserAvatarController();
 
 userRoutes.post('/', createUsersController.handle);
 userRoutes.get('/', listUserController.handle);

@@ -4,12 +4,13 @@ import { ICreateUserDto } from "../../dto/ICreateUserDto";
 import { User } from "../../entities/User";
 import { IUsersRepository } from "../IUsersRepository";
 import {hash} from 'bcrypt'
+import { IUpdateUserDto } from "../../dto/IUpdateUserDto";
 
 export class UsersRepository implements IUsersRepository{
-    readonly userRepository: Repository<User>
+    readonly repository: Repository<User>
 
     constructor(){
-        this.userRepository = dataSource.getRepository(User)
+        this.repository = dataSource.getRepository(User)
     }
     async create({name, email, password, driver_licenses}:ICreateUserDto){
 
@@ -19,7 +20,7 @@ export class UsersRepository implements IUsersRepository{
 
         const passwordHash = await hash(password, 8);
 
-        const createUser = this.userRepository.create({
+        const createUser = this.repository.create({
             name,
             email,
             password: passwordHash,
@@ -27,19 +28,21 @@ export class UsersRepository implements IUsersRepository{
             isAdmin: false,
         });
 
-        this.userRepository.save(createUser);
+        await this.repository.save(createUser);
     }
-
+    async update(data:IUpdateUserDto){
+        await this.repository.update(data.id,{...data})
+    }
     async findByEmail(email: string){
-        return this.userRepository.findOne({where:{email}})
+        return this.repository.findOne({where:{email}})
     }
 
     async findAll(){
-        return await this.userRepository.find();
+        return await this.repository.find();
     }
 
     async findById(id: string){
-        const user = await this.userRepository.findOneBy({id});
+        const user = await this.repository.findOneBy({id});
 
         return user;
     }

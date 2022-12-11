@@ -23,7 +23,7 @@ export class User{
     isAdmin: boolean;
 
     @Column({type: 'varchar', default: null})
-    avarta_url?: string;
+    avatar_file: string;
 
     @CreateDateColumn({type: 'timestamp', default: 'now()'})
     createdAt: Date ;
