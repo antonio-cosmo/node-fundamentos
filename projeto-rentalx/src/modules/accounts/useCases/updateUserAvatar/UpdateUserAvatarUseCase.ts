@@ -12,7 +12,7 @@ class UpdateUserAvatarUseCase{
     async execute({id, avatarFile}:IRequest){
         const userUpdate = await this.usersRepository.findById(id);
 
-        if(userUpdate.avatar_file) deleteFile(userUpdate.avatar_file);
+        if(userUpdate.avatar_file) await deleteFile(userUpdate.avatar_file);
         
         userUpdate.avatar_file = avatarFile;
 
