@@ -1,10 +1,11 @@
 import { Repository } from "typeorm";
-import { dataSource } from "../../../../database/data-source";
-import { ICreateUserDto } from "../../dto/ICreateUserDto";
-import { User } from "../../entities/User";
-import { IUsersRepository } from "../IUsersRepository";
+
 import {hash} from 'bcrypt'
-import { IUpdateUserDto } from "../../dto/IUpdateUserDto";
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
+import { User } from "../entities/User";
+import { ICreateUserDto } from "@modules/accounts/dto/ICreateUserDto";
+import { IUpdateUserDto } from "@modules/accounts/dto/IUpdateUserDto";
+import { dataSource } from "@shared/infra/typeorm/database/data-source";
 
 export class UsersRepository implements IUsersRepository{
     readonly repository: Repository<User>

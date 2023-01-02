@@ -1,4 +1,4 @@
-import { ICreateUserDto } from './../../dto/ICreateUserDto';
+import { ICreateUserDto } from "@modules/accounts/dto/ICreateUserDto";
 import { Request, Response } from "express";
 import { container } from 'tsyringe';
 import { CreateUsersUseCase } from './CreateUsersUseCase';

@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import swaggerUI from 'swagger-ui-express'
-import swaggerDoc from '../swagger.json'
+import swaggerDoc from '../../../../swagger.json'
 import { categoryRoutes } from './category.routes'
 import { specificationRoutes } from './specification.routes'
 import { userRoutes } from './user.routes'

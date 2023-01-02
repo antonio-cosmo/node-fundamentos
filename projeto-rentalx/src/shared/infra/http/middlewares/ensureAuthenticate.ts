@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import * as dotenv from 'dotenv'
 import {verify} from 'jsonwebtoken';
-import { UsersRepository } from "../modules/accounts/repositories/typeorm/UsersRepository";
-import { AppError } from "../shared/AppError";
+import { AppError } from "@shared/AppError";
+import { UsersRepository } from "@modules/accounts/infra/typeorm/repositories/UsersRepository";
 dotenv.config();
 const authKeyPublic = process.env.AUTH_KEY_PUBLIC;
 

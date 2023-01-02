@@ -1,4 +1,5 @@
-import { JestConfigWithTsJest } from 'ts-jest'
+import { JestConfigWithTsJest, pathsToModuleNameMapper } from 'ts-jest'
+import {compilerOptions} from './tsconfig.json'
 
 const configJest: JestConfigWithTsJest = {
   bail: true,
@@ -6,6 +7,7 @@ const configJest: JestConfigWithTsJest = {
   coverageProvider: "v8",
   preset: "ts-jest",
   testMatch: ["**/*.spec.ts"],
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {prefix: '<rootDir>/'})
 };
 
 export default configJest;

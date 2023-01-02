@@ -1,10 +1,10 @@
-import { ListCategoriesController } from './../modules/cars/useCases/listCategory/ListCategoriesController';
-import { CreateCategoryController } from './../modules/cars/useCases/createCategory/CreateCategoryController';
 import {Router} from 'express'
 import multer from 'multer'
-import { ImportyCategoryController } from '../modules/cars/useCases/importCategory/ImportCategoryController';
-import { DeleteCategoryController } from '../modules/cars/useCases/deleteCategory/DeleteCategoryController';
-import configUpload from '../config/upload'
+import { CreateCategoryController } from '@modules/cars/useCases/createCategory/CreateCategoryController'
+import { DeleteCategoryController } from '@modules/cars/useCases/deleteCategory/DeleteCategoryController'
+import { ImportyCategoryController } from '@modules/cars/useCases/importCategory/ImportCategoryController'
+import { ListCategoriesController } from '@modules/cars/useCases/listCategory/ListCategoriesController'
+import configUpload from '../../../../config/upload'
 const categoryRoutes = Router()
 
 const createCategoryController = new CreateCategoryController()
