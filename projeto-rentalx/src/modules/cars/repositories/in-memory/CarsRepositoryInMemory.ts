@@ -1,4 +1,4 @@
-import { ICreateCarDto } from "@modules/cars/dto/ICreateCarsDto";
+import { ICreateCarsDto } from "@modules/cars/dto/ICreateCarsDto";
 import { Car } from "@modules/cars/infra/typeorm/entities/Car";
 import { ICarsRepository } from "../ICarsRepository";
 
@@ -6,18 +6,18 @@ export class CarsRepositoryInMemory implements ICarsRepository{
   private cars: Car[] = []
   async create({
     brand, 
-    category_id, 
+    category, 
     daily_rate, 
     description, 
     fine_amount, 
     license_plate, 
     name
-  }: ICreateCarDto){
+  }: ICreateCarsDto){
     const car = new Car();
 
     Object.assign(car, {
       brand, 
-      category_id, 
+      category, 
       daily_rate, 
       description, 
       fine_amount, 

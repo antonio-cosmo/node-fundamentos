@@ -1,4 +1,5 @@
 import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
+import { inject, injectable } from "tsyringe";
 interface IRequestCreateCar{
   name: string;
   description: string;
@@ -6,13 +7,15 @@ interface IRequestCreateCar{
   license_plate: string;
   fine_amount: number;
   brand: string ;
-  category_id: string;
+  category: string;
 }
+
+@injectable()
 export class CreateCarsUseCase {
-  constructor(private carsRepository: ICarsRepository){}
+  constructor(@inject('CarsRepository') private carsRepository: ICarsRepository){}
   async execute({
     brand,
-    category_id,
+    category,
     daily_rate,
     description,
     fine_amount,
@@ -21,7 +24,7 @@ export class CreateCarsUseCase {
   }:IRequestCreateCar){
     await this.carsRepository.create({
       brand,
-      category_id,
+      category,
       daily_rate,
       description,
       fine_amount,

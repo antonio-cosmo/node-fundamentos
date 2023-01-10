@@ -17,7 +17,7 @@ describe("Create Cars", ()=>{
       license_plate: 'ABC-1234',
       fine_amount: 60,
       brand: 'Brand',
-      category_id: 'category'
+      category: 'category'
     }
 
     await createCarsUseCase.execute(car);

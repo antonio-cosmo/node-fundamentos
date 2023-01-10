@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-    "migration:run": "typeorm-ts-node-commonjs -r tsconfig-paths/register -d @shared/infra/typeorm/database/data-source.ts migration:run",
-    "migration:revert": "typeorm-ts-node-commonjs -r tsconfig-paths/register -d @shared/infra/typeorm/database/data-source.ts migration:revert",
-    "migration:generate": "typeorm-ts-node-commonjs -r tsconfig-paths/register -d @shared/infra/typeorm/database/data-source.ts migration:generate ",
+    "migration:run": "typeorm-ts-node-commonjs -d src/shared/infra/typeorm/database/data-source.ts migration:run",
+    "migration:revert": "typeorm-ts-node-commonjs -d src/shared/infra/typeorm/database/data-source.ts migration:revert",
+    "migration:generate": "typeorm-ts-node-commonjs -d  src/shared/infra/typeorm/database/data-source.ts  migration:generate ",
     "test": "jest"
   },
   "dependencies": {

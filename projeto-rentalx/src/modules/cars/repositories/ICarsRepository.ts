@@ -1,6 +1,6 @@
 import { Car } from '../infra/typeorm/entities/Car';
-import { ICreateCarDto } from './../dto/ICreateCarsDto';
+import { ICreateCarsDto } from './../dto/ICreateCarsDto';
 export interface ICarsRepository {
-  create: (data: ICreateCarDto) => Promise<void>;
+  create: (data: ICreateCarsDto) => Promise<void>;
   findLicencePlate:(plate: string) => Promise<Car>
 }

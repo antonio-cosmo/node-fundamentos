@@ -12,7 +12,7 @@ export class Specification{
   @Column({type: 'varchar'})
   description: string 
   
-  @CreateDateColumn({type: 'timestamp'})
+  @CreateDateColumn({type: 'timestamp', default: 'now()'})
   createdAt: Date 
 
   constructor(){
