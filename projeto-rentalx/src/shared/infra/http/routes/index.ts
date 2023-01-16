@@ -5,15 +5,16 @@ import { categoryRoutes } from './category.routes'
 import { specificationRoutes } from './specification.routes'
 import { userRoutes } from './user.routes'
 import { authenticateRoutes } from './authenticate.routes'
+import { carRoutes } from './car.routes'
 import { ensureAuthenticate } from '../middlewares/ensureAuthenticate'
-
 const routes = Router();
 
 routes.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc))
-routes.use(authenticateRoutes)
-routes.use(ensureAuthenticate);
+// routes.use(authenticateRoutes)
+// routes.use(ensureAuthenticate);
 routes.use('/category',categoryRoutes)
 routes.use('/specification', specificationRoutes)
 routes.use('/users', userRoutes)
+routes.use('/cars', carRoutes)
 
 export { routes }

@@ -5,7 +5,7 @@ import cors from 'cors'
 import { dataSource } from '@shared/infra/typeorm/database/data-source'
 import { routes } from '@shared/infra/http/routes'
 import { AppError } from '@shared/AppError'
-
+import '@shared/container/index'
 
 
 

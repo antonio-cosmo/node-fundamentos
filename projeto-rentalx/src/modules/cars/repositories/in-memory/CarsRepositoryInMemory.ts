@@ -23,7 +23,7 @@ export class CarsRepositoryInMemory implements ICarsRepository{
       fine_amount, 
       license_plate, 
       name,
-      available: false,
+      available: true,
       created_at: new Date()
     });
 
@@ -34,6 +34,10 @@ export class CarsRepositoryInMemory implements ICarsRepository{
     const car = this.cars.find(car => car.license_plate === license);
 
     return car
+  }
+
+  async all(){
+    return this.cars
   }
 
 }

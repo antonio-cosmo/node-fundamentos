@@ -55,5 +55,23 @@ describe("Create Cars", ()=>{
   
       await createCarsUseCase.execute(car2);
     }).rejects.toBeInstanceOf(AppError)
-  })
+  });
+
+  it('should be able create new car with available true by default', async ()=> {
+    const car = {
+      name: 'Car',
+      description: 'Description Car',
+      daily_rate: 100,
+      license_plate: 'ABCD-1234',
+      fine_amount: 60,
+      brand: 'Brand',
+      category: 'category'
+    }
+
+    await createCarsUseCase.execute(car);
+
+    const findCar = await carsRepositoryInMemory.findByLicensePlate(car.license_plate);
+    expect(findCar.available).toBe(true);
+    
+  });
 })

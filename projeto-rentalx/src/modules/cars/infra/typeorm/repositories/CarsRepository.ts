@@ -20,14 +20,14 @@ export class CarsRepository implements ICarsRepository {
       fine_amount,
       license_plate,
       name,
+      category:{id: category}
     });
 
-    car.category.id = category;
 
     await this.repository.save(car)
   }
 
-  async findLicencePlate(plate: string){
+  async findByLicensePlate(plate: string){
     const car = await this.repository.findOne({
       where:{
         license_plate: plate
@@ -36,5 +36,13 @@ export class CarsRepository implements ICarsRepository {
 
     return car
   };
+
+  async all(){
+    return await this.repository.find({
+      relations:{
+        category: true
+      }
+    });
+  }
 
 }
