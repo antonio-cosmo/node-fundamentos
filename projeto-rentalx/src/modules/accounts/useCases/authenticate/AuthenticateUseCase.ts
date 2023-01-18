@@ -15,10 +15,6 @@ interface IRequest{
 
 interface IResponse{
     token: string,
-    user: {
-        name: string,
-        email: string
-    }
 }
 
 const authKeyPublic = process.env.AUTH_KEY_PUBLIC;
@@ -36,14 +32,10 @@ class AuthenticateUsecase{
 
         if(!passwordMatch) throw new AppError('Incorrect email or passeord',400);
 
-        const token = sign({},authKeyPublic,{subject: user.id, expiresIn:'1d'})
+        const token = sign({name: user.name, email:user.email},authKeyPublic,{subject: user.id, expiresIn:'1d'})
 
         const tokenResponse: IResponse = {
             token,
-            user:{
-                email: user.email,
-                name: user.name
-            }
         }
 
         return tokenResponse;

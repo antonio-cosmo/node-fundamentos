@@ -8,7 +8,8 @@
     "migration:run": "typeorm-ts-node-commonjs -d src/shared/infra/typeorm/database/data-source.ts migration:run",
     "migration:revert": "typeorm-ts-node-commonjs -d src/shared/infra/typeorm/database/data-source.ts migration:revert",
     "migration:generate": "typeorm-ts-node-commonjs -d  src/shared/infra/typeorm/database/data-source.ts  migration:generate ",
-    "test": "jest"
+    "test": "jest",
+    "seed:admin": "ts-node-dev src/shared/infra/typeorm/database/seed/admin.ts"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

@@ -5,6 +5,8 @@ import { DeleteCategoryController } from '@modules/cars/useCases/deleteCategory/
 import { ImportyCategoryController } from '@modules/cars/useCases/importCategory/ImportCategoryController'
 import { ListCategoriesController } from '@modules/cars/useCases/listCategory/ListCategoriesController'
 import configUpload from '../../../../config/upload'
+import { ensureAuthenticate } from '../middlewares/ensureAuthenticate'
+import { ensureAdmin } from '../middlewares/ensureAdmin'
 const categoryRoutes = Router()
 
 const createCategoryController = new CreateCategoryController()
@@ -15,8 +17,11 @@ const deleteCategoryController = new DeleteCategoryController()
 
 const uploadCategory = multer(configUpload.upload('categories'))
 
-categoryRoutes.post('/', createCategoryController.handle)
 categoryRoutes.get('/', listCategoriesController.handle)
+
+categoryRoutes.use(ensureAuthenticate);
+categoryRoutes.use(ensureAdmin);
+categoryRoutes.post('/', createCategoryController.handle)
 categoryRoutes.delete('/', deleteCategoryController.handle)
 categoryRoutes.post('/import',uploadCategory.single('file'),importCategoryController.handle)
 

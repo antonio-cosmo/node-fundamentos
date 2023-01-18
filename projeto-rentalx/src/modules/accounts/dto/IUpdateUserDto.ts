@@ -3,6 +3,7 @@ export interface IUpdateUserDto{
     name?: string;
     email?: string;
     password?: string;
-    driver_licenses?: string
-    avatar_file?: string
+    driver_licenses?: string;
+    avatar_file?: string;
+    isAdmin?: boolean;
 }

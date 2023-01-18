@@ -13,20 +13,21 @@ export class UsersRepository implements IUsersRepository{
     constructor(){
         this.repository = dataSource.getRepository(User)
     }
-    async create({name, email, password, driver_licenses}:ICreateUserDto){
+    async create(userData:ICreateUserDto){
 
-        const userAlreadyExists = await this.findByEmail(email);
+        const userAlreadyExists = await this.findByEmail(userData.email);
 
         if(userAlreadyExists)  throw new Error("Usuario ja existe");
 
-        const passwordHash = await hash(password, 8);
+        const passwordHash = await hash(userData.password, 8);
 
+        const admin = userData.isAdmin || false;
         const createUser = this.repository.create({
-            name,
-            email,
+            name: userData.name,
+            email: userData.email,
             password: passwordHash,
-            driver_licenses,
-            isAdmin: false,
+            driver_licenses: userData.driver_licenses,
+            isAdmin: admin,
         });
 
         await this.repository.save(createUser);

@@ -7,7 +7,7 @@ dotenv.config();
 const authKeyPublic = process.env.AUTH_KEY_PUBLIC;
 
 interface IPayload{
-    sub: string
+    sub: string,
 }
 
 
@@ -25,7 +25,7 @@ async function ensureAuthenticate(req:Request, res: Response, next: NextFunction
         if(!userAlredExist) throw new AppError('User does not exist');
 
         req.user ={
-            id: user_id
+            id: user_id,
         }
         next();
     }catch(e){
