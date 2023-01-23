@@ -20,7 +20,8 @@ export class CarsRepository implements ICarsRepository {
       fine_amount,
       license_plate,
       name,
-      category:{id: category}
+      category_id: category,
+      category: {id: category}
     });
 
 
@@ -37,12 +38,25 @@ export class CarsRepository implements ICarsRepository {
     return car
   };
 
-  async all(){
-    return await this.repository.find({
-      relations:{
-        category: true
-      }
-    });
+  async findAvailableCars(name?: string, brand?: string, category_id?:string){
+
+    const carsQuery = this.repository.createQueryBuilder('c')
+    .where("available = :available",{available: true})
+    
+    
+    if(category_id){
+      carsQuery.andWhere('category_id = :category_id',{category_id})
+    }
+    if(name){
+      carsQuery.andWhere("name = :name", {name})
+    }
+
+    if(brand){
+      carsQuery.andWhere("brand = :brand", {brand})
+    }
+
+    const cars = await carsQuery.getMany();
+    return cars
   }
 
 }

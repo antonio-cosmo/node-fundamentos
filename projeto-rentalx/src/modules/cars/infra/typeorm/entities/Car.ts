@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryColumn, CreateDateColumn, ManyToOne} from 'typeorm'
+import {Entity, Column, PrimaryColumn, CreateDateColumn, ManyToOne, JoinColumn} from 'typeorm'
 import { v4 as uuidv4 } from 'uuid';
 import { Category } from './Category';
 
@@ -29,8 +29,12 @@ class Car {
   @Column({type: 'varchar'})
   brand: string ;
 
-  @ManyToOne(() => Category, (category) => category.cars)
+  @ManyToOne(() => Category)
+  @JoinColumn({name: ' category'})
   category: Category;
+
+  @Column({type: 'varchar'})
+  category_id: string
 
   @CreateDateColumn({type:'timestamp', default: 'now()'})
   created_at?: Date;

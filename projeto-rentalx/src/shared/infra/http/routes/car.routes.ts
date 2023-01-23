@@ -1,14 +1,14 @@
 import { CreateCarsController } from "@modules/cars/useCases/createCars/CreateCarsController";
-import { ListCarController } from "@modules/cars/useCases/listCars/ListCarController";
+import { FindAvailableCarsController } from "@modules/cars/useCases/listCars/FindAvailableCarsController";
 import { Router } from "express";
 import { ensureAdmin } from "../middlewares/ensureAdmin";
 import { ensureAuthenticate } from "../middlewares/ensureAuthenticate";
 
 const carRoutes = Router();
 const createCarsController = new CreateCarsController();
-const listCarController = new ListCarController();
+const findAvailableCarsController = new FindAvailableCarsController();
 
-carRoutes.get('/', listCarController.handle);
+carRoutes.get('/available', findAvailableCarsController.handle);
 
 carRoutes.use(ensureAuthenticate);
 carRoutes.use(ensureAdmin);
