@@ -1,6 +1,6 @@
 import { ICreateCarsDto } from "@modules/cars/dto/ICreateCarsDto";
 import { Car } from "@modules/cars/infra/typeorm/entities/Car";
-import { ICarsRepository } from "../ICarsRepository";
+import { FindAvailableCrasRequest, ICarsRepository } from "../ICarsRepository";
 
 export class CarsRepositoryInMemory implements ICarsRepository{
   private cars: Car[] = []
@@ -17,13 +17,13 @@ export class CarsRepositoryInMemory implements ICarsRepository{
 
     Object.assign(car, {
       brand, 
-      category, 
       daily_rate, 
       description, 
       fine_amount, 
       license_plate, 
       name,
       available: true,
+      category_id: category,
       created_at: new Date()
     });
 
@@ -36,19 +36,27 @@ export class CarsRepositoryInMemory implements ICarsRepository{
     return car
   }
 
-  async findAvailableCars(name?: string, brand?: string, categoryId?:string){
-    return this.cars.filter(car => {
-      if( car.available === true &&
-          (brand && car.brand === brand) ||
-          (name && car.name === name) ||
-          (categoryId && car.category.id === categoryId) ||
-          car.available === true
+  async findAvailableCars({name, brand, category_id}: FindAvailableCrasRequest){
+
+    const availableTrue = this.cars.filter(car => car.available === true);
+
+    const findByCars = availableTrue.filter(car => {
+      if(
+        (name && car.name === name) ||
+        (brand && car.brand === brand) ||
+        (category_id && car.category_id === category_id)
       ){
-        return car
+        return car;
       }
 
       return null
     })
+
+    if(findByCars.length > 0){
+      return findByCars
+    }
+
+    return availableTrue;
     
   }
 
