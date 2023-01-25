@@ -1,6 +1,7 @@
-import {Entity, Column, PrimaryColumn, CreateDateColumn, ManyToOne, JoinColumn} from 'typeorm'
+import {Entity, Column, PrimaryColumn, CreateDateColumn, ManyToOne, JoinColumn, ManyToMany, JoinTable} from 'typeorm'
 import { v4 as uuidv4 } from 'uuid';
 import { Category } from './Category';
+import { Specification } from './Specification';
 
 @Entity('cars')
 class Car {
@@ -28,6 +29,20 @@ class Car {
 
   @Column({type: 'varchar'})
   brand: string ;
+
+  @ManyToMany(() => Specification)
+  @JoinTable({
+    name: 'specification_car',
+    joinColumn:{
+      name: 'car_id',
+      referencedColumnName: 'id'
+    },
+    inverseJoinColumn:{
+      name: 'specification',
+      referencedColumnName: 'id'
+    }
+  })
+  specifications: Specification[]
 
   @ManyToOne(() => Category)
   @JoinColumn({name: ' category'})

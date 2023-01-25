@@ -1,6 +1,6 @@
 import { ICreateSpecificationDTO, ISpecificationsRepository } from '@modules/cars/repositories/ISpecificationsRepository';
 import { dataSource } from '@shared/infra/typeorm/database/data-source';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Specification } from "../entities/Specification";
 
 export class SpecificationsRepository implements ISpecificationsRepository{
@@ -29,5 +29,13 @@ export class SpecificationsRepository implements ISpecificationsRepository{
     const listSpesifications =  await this.repository.find()
     return listSpesifications
   };
+
+  async findByIds(ids: string[]){
+    const specifications = await this.repository.findBy({
+      id: In(ids)
+    })
+
+    return specifications;
+  }
 
 }

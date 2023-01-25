@@ -1,9 +1,10 @@
 import { ICreateCarsDto } from "@modules/cars/dto/ICreateCarsDto";
 import { Car } from "@modules/cars/infra/typeorm/entities/Car";
-import { FindAvailableCrasRequest, ICarsRepository } from "../ICarsRepository";
+import { FindAvailableCarsRequest, ICarsRepository } from "../ICarsRepository";
 
 export class CarsRepositoryInMemory implements ICarsRepository{
-  private cars: Car[] = []
+  private cars: Car[] = [];
+
   async create({
     brand, 
     category, 
@@ -28,6 +29,8 @@ export class CarsRepositoryInMemory implements ICarsRepository{
     });
 
     this.cars.push(car);
+
+    return car;
   };
 
   async findByLicensePlate(license: string){
@@ -36,7 +39,7 @@ export class CarsRepositoryInMemory implements ICarsRepository{
     return car
   }
 
-  async findAvailableCars({name, brand, category_id}: FindAvailableCrasRequest){
+  async findAvailableCars({name, brand, category_id}: FindAvailableCarsRequest){
 
     const availableTrue = this.cars.filter(car => car.available === true);
 
@@ -60,4 +63,7 @@ export class CarsRepositoryInMemory implements ICarsRepository{
     
   }
 
+  async findById(id: string){
+    return this.cars.find(car => car.id === id);
+  }
 }

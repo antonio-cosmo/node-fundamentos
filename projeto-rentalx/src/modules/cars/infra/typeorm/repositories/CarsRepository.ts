@@ -1,8 +1,12 @@
 import { ICreateCarsDto } from "@modules/cars/dto/ICreateCarsDto";
-import { ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
+import { FindAvailableCarsRequest, ICarsRepository } from "@modules/cars/repositories/ICarsRepository";
 import { dataSource } from "@shared/infra/typeorm/database/data-source";
 import { Repository } from 'typeorm'
 import { Car } from "../entities/Car";
+
+interface IUpdate{
+  car: Car
+}
 export class CarsRepository implements ICarsRepository {
   private repository: Repository<Car>;
 
@@ -10,8 +14,7 @@ export class CarsRepository implements ICarsRepository {
     this.repository = dataSource.getRepository(Car)
   }
 
-  async create({brand,category,daily_rate,description,fine_amount,license_plate,name}:ICreateCarsDto){
-
+  async create({brand,category_id,daily_rate,description,fine_amount,license_plate,name,category}:ICreateCarsDto){      
 
     const car = this.repository.create({
       brand,
@@ -20,12 +23,18 @@ export class CarsRepository implements ICarsRepository {
       fine_amount,
       license_plate,
       name,
-      category_id: category,
-      category: {id: category}
+      category_id,
+      category,
     });
 
 
-    await this.repository.save(car)
+    return await this.repository.save(car)
+
+  }
+
+  async update({car}:IUpdate){
+    const carUpdate = await  this.repository.save(car)
+    return carUpdate
   }
 
   async findByLicensePlate(plate: string){
@@ -38,10 +47,10 @@ export class CarsRepository implements ICarsRepository {
     return car
   };
 
-  async findAvailableCars(name?: string, brand?: string, category_id?:string){
+  async findAvailableCars({brand, category_id, name}:FindAvailableCarsRequest){
 
     const carsQuery = this.repository.createQueryBuilder('c')
-    .where("available = :available",{available: true})
+      .where("available = :available",{available: true})
     
     
     if(category_id){
@@ -57,6 +66,11 @@ export class CarsRepository implements ICarsRepository {
 
     const cars = await carsQuery.getMany();
     return cars
+  }
+
+  async findById(id: string){
+    const car = await this.repository.findOne({where: {id}});
+    return car
   }
 
 }

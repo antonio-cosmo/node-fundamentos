@@ -1,3 +1,6 @@
+import { Category } from "../infra/typeorm/entities/Category";
+import { Specification } from "../infra/typeorm/entities/Specification";
+
 export interface ICreateCarsDto{
   name: string;
   description: string;
@@ -5,5 +8,6 @@ export interface ICreateCarsDto{
   license_plate: string;
   fine_amount: number;
   brand: string ;
-  category: string;
+  category_id: string;
+  category:Category
 }

@@ -28,7 +28,11 @@ class CategoriesRepository implements ICategoriesRepository {
 
     return category
   }
-
+  async findById(id: string){
+    return this.repository.findOne({where:{
+      id
+    }})
+  }
   async all(){
     const categories = await this.repository.find()
 

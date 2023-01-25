@@ -6,22 +6,22 @@ export class CreateCarsController{
   async handle(req: Request, res: Response){
     const {
       brand,
-      category,
+      category_id,
       daily_rate,
       description,
       fine_amount,
       license_plate,
-      name
+      name,
     } = req.body
     const createCarsUsecase = container.resolve(CreateCarsUseCase);
     await createCarsUsecase.execute({
       brand,
-      category,
+      category_id,
       daily_rate,
       description,
       fine_amount,
       license_plate,
-      name
+      name,
     });
 
     return res.status(201).json({message: "Car created"})
