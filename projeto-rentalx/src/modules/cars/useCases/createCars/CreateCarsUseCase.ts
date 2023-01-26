@@ -32,11 +32,9 @@ export class CreateCarsUseCase {
 
     if(carAlreadyExist) throw new AppError('Cars already exist');
     
-    const findCategory = await this.categoriesRepository.findById(category_id)
     const car = await this.carsRepository.create({
       brand,
       category_id,
-      category:findCategory,
       daily_rate,
       description,
       fine_amount,

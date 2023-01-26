@@ -1,5 +1,4 @@
-import { Category } from "../infra/typeorm/entities/Category";
-import { Specification } from "../infra/typeorm/entities/Specification";
+
 
 export interface ICreateCarsDto{
   name: string;
@@ -9,5 +8,4 @@ export interface ICreateCarsDto{
   fine_amount: number;
   brand: string ;
   category_id: string;
-  category:Category
 }

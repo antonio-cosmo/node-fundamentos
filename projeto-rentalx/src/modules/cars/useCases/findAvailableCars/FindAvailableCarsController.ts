@@ -9,11 +9,11 @@ export class FindAvailableCarsController{
 
     const findAvailableCarsUseCase = container.resolve(FindAvailableCarsUseCase);
 
-    const car = await findAvailableCarsUseCase.execute(
-      name as string, 
-      brand as string, 
-      category_id as string
-    );
+    const car = await findAvailableCarsUseCase.execute({
+      brand: brand as string,
+      name: name as string,
+      category_id: category_id as string
+    });
 
     return res.status(200).json(car);
   }

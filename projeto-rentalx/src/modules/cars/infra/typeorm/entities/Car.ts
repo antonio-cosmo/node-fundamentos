@@ -38,17 +38,17 @@ class Car {
       referencedColumnName: 'id'
     },
     inverseJoinColumn:{
-      name: 'specification',
+      name: 'specification_id',
       referencedColumnName: 'id'
     }
   })
   specifications: Specification[]
 
   @ManyToOne(() => Category)
-  @JoinColumn({name: ' category'})
+  @JoinColumn({name: 'category_id'})
   category: Category;
 
-  @Column({type: 'varchar'})
+  @Column({type: 'uuid'})
   category_id: string
 
   @CreateDateColumn({type:'timestamp', default: 'now()'})

@@ -13,9 +13,6 @@ class Category {
   @Column({type: 'varchar'}) 
   description: string 
 
-  // @OneToMany(() => Car, (car) => car.category)
-  // cars: Car[]
-
   @CreateDateColumn({type: 'timestamp', default: 'now()'})
   createdAt?: Date 
 

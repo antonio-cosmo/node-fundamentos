@@ -14,7 +14,7 @@ export class CarsRepository implements ICarsRepository {
     this.repository = dataSource.getRepository(Car)
   }
 
-  async create({brand,category_id,daily_rate,description,fine_amount,license_plate,name,category}:ICreateCarsDto){      
+  async create({brand,category_id,daily_rate,description,fine_amount,license_plate,name}:ICreateCarsDto){      
 
     const car = this.repository.create({
       brand,
@@ -24,7 +24,6 @@ export class CarsRepository implements ICarsRepository {
       license_plate,
       name,
       category_id,
-      category,
     });
 
 
